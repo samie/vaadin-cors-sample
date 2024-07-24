@@ -2,10 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!-- Project from https://start.vaadin.com/project/64aaae31-736a-4946-afa3-38f0de196770 -->
-    <groupId>com.example.application</groupId>
-    <artifactId>my-app</artifactId>
-    <name>my-app</name>
+
+    <!-- Project from https://github.com/samie/vaadin-cors-sample -->
+    <groupId>org.vaadin.example.cors</groupId>
+    <artifactId>vaadin-cors-sample</artifactId>
+    <name>CORS Embedding Sample for Vaadin</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
