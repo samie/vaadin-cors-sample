@@ -13,38 +13,34 @@ import java.io.IOException;
 @WebFilter(filterName = "Vaadin CORS Filter", asyncSupported = true, urlPatterns = "/*")
 public class CORSFilter extends HttpFilter {
 
+    private String allowedOrigins = "https://samie.github.io";
 
-        static {
-            System.out.println("LOAD");
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
+    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        String origin = request.getHeader("Origin");
+        if (isOrginAllowed(origin)) {
+            response.setHeader("Access-Control-Allow-Origin", allowedOrigins);
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         }
 
-        @Override
-        public void init(FilterConfig filterConfig) throws ServletException {
-            System.out.println("REGISTER");
+        if ("options".equalsIgnoreCase(request.getMethod())) {
+            response.addHeader("Access-Control-Allow-Methods", "GET, POST");
+            response.addHeader("Access-Control-Allow-Headers", "content-type");
+            response.getWriter().flush();
+            return;
         }
+        filterChain.doFilter(request, response);
 
-        @Override
-        public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-            String origin = request.getHeader("Origin");
-            if (isOrginAllowed(origin)) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-                response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-            }
+    }
 
-            if ("options".equalsIgnoreCase(request.getMethod())) {
-                response.addHeader("Access-Control-Allow-Methods", "GET, POST");
-                response.addHeader("Access-Control-Allow-Headers", "content-type");
-                response.getWriter().flush();
-                return;
-            }
-            filterChain.doFilter(request, response);
-
-        }
-
-        private boolean isOrginAllowed(String origin) {
-            return true;
-        }
+    private boolean isOrginAllowed(String origin) {
+        return origin != null && allowedOrigins.contains(origin);
+    }
 
     @Configuration
     public static class SpringBootSupport {
