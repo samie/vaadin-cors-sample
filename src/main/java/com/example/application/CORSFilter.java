@@ -39,13 +39,13 @@ public class CORSFilter extends HttpFilter {
         filterChain.doFilter(request, response);
 
         Collection<String> cookieHeaders = response.getHeaders("Set-Cookie");
-        cookieHeaders.forEach(c -> {
-            if (c.startsWith("JSESSIONID")) {
-                response.setHeader("Set-Cookie", makeSameSite(c));
-            } else {
-                response.addHeader("Set-Cookie", c);
-            }
-        });
+        cookieHeaders.stream()
+                .filter(c -> c.startsWith("JSESSIONID"))
+                .findFirst()
+                .ifPresent(sessionIdCookie -> response.setHeader("Set-Cookie", makeSameSite(sessionIdCookie)));
+        cookieHeaders.stream()
+              .filter(c -> !c.startsWith("JSESSIONID"))
+              .forEach(c -> response.addHeader("Set-Cookie", c));
 
     }
 
