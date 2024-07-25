@@ -1,7 +1,8 @@
 # CORS Sample
 
-This project can be used as a starting point to create your own Vaadin application with Spring Boot.
-It contains all the necessary configuration and some placeholder files to get you started.
+This project demonstrates how to configure Cross-Origin Resource Sharing (CORS) in a Vaadin application with Spring Boot. It includes essential configuration and example files to help you quickly set up CORS in your own projects, ensuring secure and flexible resource sharing across different origins.
+
+This project was created from [start.vaadin.com](https://start.vaadin.com/).
 
 ## Running the application
 
@@ -21,6 +22,29 @@ ready to be deployed. The file can be found in the `target` folder after the bui
 
 Once the JAR file is built, you can run it using
 `java -jar target/my-app-1.0-SNAPSHOT.jar`
+
+## Building the Docker Image
+
+To build the Docker image, navigate to the project directory where the `Dockerfile` is located and run the following command:
+
+```bash
+docker build -t vaadin-cors-sample .
+```
+
+This command builds a Docker image using the `Dockerfile` in the current directory and tags the image as `vaadin-cors-sample`.
+
+## Running the Docker Image
+
+To run the Docker image, use the following command:
+
+```bash
+docker run -p 8080:8080 vaadin-cors-sample
+```
+
+This command runs the Docker image you previously built. The `-p 8080:8080` option maps the container's port 8080 to your machine's port 8080.
+
+Now, you can access the application at `http://localhost:8080`.
+
 
 ## Project structure
 
