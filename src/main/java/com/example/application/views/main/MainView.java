@@ -53,37 +53,4 @@ public class MainView extends Div {
             // Nothing to configure
         }
     }
-
-    @WebFilter(filterName = "CORS Filter", asyncSupported = true, value = "/*")
-    public static class CORSFilter implements Filter {
-        @Override
-        public void init(FilterConfig filterConfig) throws ServletException {
-        }
-
-        @Override
-        public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-            HttpServletRequest request = (HttpServletRequest) servletRequest;
-            HttpServletResponse response = (HttpServletResponse) servletResponse;
-
-            String origin = request.getHeader("Origin");
-            if (isOrginAllowed(origin)) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-                response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-            }
-
-            if ("options".equalsIgnoreCase(request.getMethod())) {
-                response.addHeader("Access-Control-Allow-Methods", "GET, POST");
-                response.addHeader("Access-Control-Allow-Headers", "content-type");
-                response.getWriter().flush();
-                return;
-            }
-            filterChain.doFilter(servletRequest, servletResponse);
-
-        }
-
-        private boolean isOrginAllowed(String origin) {
-            return true;
-        }
-    }
 }
