@@ -23,9 +23,10 @@ public class CORSFilter extends HttpFilter {
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         String origin = request.getHeader("Origin");
         if (isOrginAllowed(origin)) {
-            response.setHeader("Access-Control-Allow-Origin", allowedOrigins);
+            response.setHeader("Access-Control-Allow-Origin", origin);
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+            response.addHeader("Access-Control-Allow-Credentials", "true");
         }
 
         if ("options".equalsIgnoreCase(request.getMethod())) {
