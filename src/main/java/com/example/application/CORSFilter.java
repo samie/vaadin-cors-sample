@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -40,17 +41,19 @@ public class CORSFilter extends HttpFilter {
 
         Collection<String> cookieHeaders = response.getHeaders("Set-Cookie");
         cookieHeaders.stream()
-                .filter(c -> c.startsWith("JSESSIONID"))
+                .filter(c -> c.startsWith("JSESSIONID="))
                 .findFirst()
-                .ifPresent(sessionIdCookie -> response.setHeader("Set-Cookie", makeSameSite(sessionIdCookie)));
+                .ifPresent(c -> response.setHeader("Set-Cookie", makeSameSite(c)));
         cookieHeaders.stream()
-              .filter(c -> !c.startsWith("JSESSIONID"))
+              .filter(c -> !c.startsWith("JSESSIONID="))
               .forEach(c -> response.addHeader("Set-Cookie", c));
 
     }
 
-    private String makeSameSite(String string) {
-        return string.contains("SameSite=") ? string : string + ";SameSite=None; Secure";
+    private String makeSameSite(String cookie) {
+        return cookie.contains("SameSite=") ?
+                cookie :
+                cookie + ";SameSite=None; Secure";
     }
 
     private boolean isOrginAllowed(String origin) {
@@ -61,6 +64,7 @@ public class CORSFilter extends HttpFilter {
     public static class SpringBootSupport {
 
         @Bean
+        @Order()
         public Filter vaadinCORSFilter() {
             return new CORSFilter();
         }
