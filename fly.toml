@@ -6,6 +6,9 @@
 app = 'vaadin-cors-sample'
 primary_region = 'arn'
 
+[[vm]]
+size = "shared-cpu-1x"
+
 [http_service]
 internal_port = 8080
 force_https = true
