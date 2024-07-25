@@ -8,6 +8,7 @@ primary_region = 'arn'
 
 [[vm]]
 size = "shared-cpu-1x"
+memory = "512mb"
 
 [http_service]
 internal_port = 8080
