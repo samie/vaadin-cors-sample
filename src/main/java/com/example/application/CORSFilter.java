@@ -50,7 +50,7 @@ public class CORSFilter extends HttpFilter {
     }
 
     private String makeSameSite(String string) {
-        return string.contains("SameSite=") ? string : string + ";SameSite=None";
+        return string.contains("SameSite=") ? string : string + ";SameSite=None; Secure";
     }
 
     private boolean isOrginAllowed(String origin) {
