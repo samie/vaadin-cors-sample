@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @WebFilter(filterName = "Vaadin CORS Filter", asyncSupported = true, urlPatterns = "/*")
@@ -39,7 +40,9 @@ public class CORSFilter extends HttpFilter {
         }
         filterChain.doFilter(request, response);
 
-        Collection<String> cookieHeaders = response.getHeaders("Set-Cookie");
+        Collection<String> cookieHeaders = new ArrayList<>();
+        cookieHeaders.addAll(response.getHeaders("Set-Cookie"));
+        cookieHeaders.addAll(response.getHeaders("set-cookie"));
         cookieHeaders.stream()
                 .filter(c -> c.startsWith("JSESSIONID="))
                 .findFirst()
