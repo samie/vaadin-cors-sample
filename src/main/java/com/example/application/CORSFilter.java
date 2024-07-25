@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
+import java.util.Collection;
 
 @WebFilter(filterName = "Vaadin CORS Filter", asyncSupported = true, urlPatterns = "/*")
 public class CORSFilter extends HttpFilter {
@@ -37,6 +38,19 @@ public class CORSFilter extends HttpFilter {
         }
         filterChain.doFilter(request, response);
 
+        Collection<String> cookieHeaders = response.getHeaders("Set-Cookie");
+        cookieHeaders.forEach(c -> {
+            if (c.startsWith("JSESSIONID")) {
+                response.setHeader("Set-Cookie", makeSameSite(c));
+            } else {
+                response.addHeader("Set-Cookie", c);
+            }
+        });
+
+    }
+
+    private String makeSameSite(String string) {
+        return string.contains("SameSite=") ? string : string + ";SameSite=None";
     }
 
     private boolean isOrginAllowed(String origin) {
