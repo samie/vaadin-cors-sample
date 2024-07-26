@@ -1,22 +1,28 @@
 # CORS Sample
 
-This project demonstrates how to configure Cross-Origin Resource Sharing (CORS) in a Vaadin application with Spring Boot. It includes essential configuration and example files to help you quickly set up CORS in your own projects, ensuring secure and flexible resource sharing across different origins.
+This project demonstrates how to configure Cross-Origin Resource Sharing (CORS) in a Vaadin application with Spring Boot. 
+It includes essential configuration and example files to help you quickly set up CORS in your own projects, ensuring 
+secure resource sharing across different origins.
+
+Demo is running at: https://samie.github.io/vaadin-cors-sample/
+
+There are two branches in this repository:
+1. [main](https://github.com/samie/vaadin-cors-sample/tree/main) - The embedded Vaadin application. It implements a simple newsletter subscription view (stores no data).
+2. [website](https://github.com/samie/vaadin-cors-sample/tree/website) - Simple website that embeds the application running on another domain.
 
 This project was created from [start.vaadin.com](https://start.vaadin.com/).
 
 ## Running the application
 
 The project is a standard Maven project. To run it from the command line,
-type `mvnw` (Windows), or `./mvnw` (Mac & Linux), then open
-http://localhost:8080 in your browser.
+Run Maven build `mvn`, then open http://localhost:8080 in your browser.
 
 You can also import the project to your IDE of choice as you would with any
 Maven project. Read more on [how to import Vaadin projects to different IDEs](https://vaadin.com/docs/latest/guide/step-by-step/importing) (Eclipse, IntelliJ IDEA, NetBeans, and VS Code).
 
 ## Deploying to Production
 
-To create a production build, call `mvnw clean package -Pproduction` (Windows),
-or `./mvnw clean package -Pproduction` (Mac & Linux).
+To create a production build, call `mvn clean package -Pproduction`.
 This will build a JAR file with all the dependencies and front-end resources,
 ready to be deployed. The file can be found in the `target` folder after the build completes.
 
@@ -43,17 +49,25 @@ docker run -p 8080:8080 vaadin-cors-sample
 
 This command runs the Docker image you previously built. The `-p 8080:8080` option maps the container's port 8080 to your machine's port 8080.
 
-Now, you can access the application at `http://localhost:8080`.
+Now, you can access the application at http://localhost:8080.
 
 
-## Project structure
+## Required Vaadin application configuration
 
-- `MainLayout.java` in `src/main/java` contains the navigation setup (i.e., the
-  side/top bar and the main menu). This setup uses
-  [App Layout](https://vaadin.com/docs/components/app-layout).
-- `views` package in `src/main/java` contains the server-side Java views of your application.
-- `views` folder in `src/main/frontend` contains the client-side JavaScript views of your application.
-- `themes` folder in `src/main/frontend` contains the custom CSS styles.
+In order to application to be available to other demand, a few things needs to be in place;
+1. SSL need to be turned on for secure HTTPS connection.
+2. Session cookie header needs to be configured with `SameSite=None` and `Secure`.
+3. Additional CORS headers need to be added to requests and preflight `OPTIONS` request handled properly. 
+4. `Access-Control-Allow-Origin` header cannot be `*` but list of allowed domains. 
+
+You can check the [source code](https://github.com/samie/vaadin-cors-sample/blob/main/src/main/java/com/example/application/Application.java#L40) to see how these were implemented for Spring Boot.
+
+## Embedding to another website
+
+This project demonstrates how to add required HTTP headers to serve the application across domains.
+When embedding the application you need to do two things:
+1. Register the web component in you html head section: `<script type="module" src="https://vaadin-cors-sample.fly.dev/web-component/newsletter-subscription.js"></script>`
+2. Embed the web component to you page body: `<newsletter-subscription></newsletter-subscription>`
 
 ## Useful links
 
