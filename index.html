@@ -9,8 +9,13 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
+            min-height: 100vh;
             margin: 0;
-            padding: 0;
+        }
+        .main {
+            display: flex;
+            flex: 1;
         }
         .content {
             flex: 3;
@@ -19,20 +24,31 @@
         .sidebar {
             flex: 1;
             background-color: #f4f4f4;
-            padding: 20px;
+            padding: 10px;
             border-left: 1px solid #ccc;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>Welcome to Website</h1>
-        <p><i>This website demonstrates how you can use Vaadin applications embedded as part of you website.</i></p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="main">
+        <div class="content">
+            <h1>Welcome to a website</h1>
+            <p><i>This page demonstrates how you can use <a href="https://vaadin-cors-sample.fly.dev/">a Vaadin web application</a> embedded as part of you website. Learn more about Vaadin at <a href="https://vaadin.com/">vaadin.com</a>.</i></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="sidebar">
+          <newsletter-subscription></newsletter-subscription>
+        </div>
     </div>
-    <div class="sidebar">
-      <newsletter-subscription></newsletter-subscription>
-    </div>
+    <footer>
+        &copy; 2024 Sami Ekblad, Vaadin. All rights reserved.
+    </footer>
 </body>
 </html>
