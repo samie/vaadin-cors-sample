@@ -54,11 +54,12 @@ Now, you can access the application at http://localhost:8080.
 
 ## Required Vaadin application configuration
 
-In order to application to be available to other demand, a few things needs to be in place;
-1. SSL need to be turned on for secure HTTPS connection.
-2. Session cookie header needs to be configured with `SameSite=None` and `Secure`.
-3. Additional CORS headers need to be added to requests and preflight `OPTIONS` request handled properly. 
-4. `Access-Control-Allow-Origin` header cannot be `*`, but explicit list of allowed domains. 
+To make the application available for cross-origin requests, ensure the following:
+1. Enable SSL for secure HTTPS connections.
+2. Configure the session cookie header with SameSite=None and Secure.
+3. Add necessary CORS headers `Access-Control-Allow-Origin` and `Access-Control-Allow-Credentials` to responses. 
+4. Properly handle the preflight OPTIONS requests. 
+5. Use an explicit list of allowed domains for the `Access-Control-Allow-Origin header instead of *.
 
 You can check the [source code](https://github.com/samie/vaadin-cors-sample/blob/main/src/main/java/com/example/application/Application.java#L40) to see how these were implemented for Spring Boot.
 
