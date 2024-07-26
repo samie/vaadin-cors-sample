@@ -1,4 +1,4 @@
-package com.example.application.views.main;
+package com.example.application;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.WebComponentExporter;
@@ -6,16 +6,11 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.webcomponent.WebComponent;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
 
 @PageTitle("Vaadin CORS sample")
 @Route(value = "")
@@ -35,14 +30,14 @@ public class MainView extends Div {
             emailField.setVisible(false);
             subscribeButton.setVisible(false);
         });
-        HorizontalLayout layout = new HorizontalLayout(FlexComponent.Alignment.BASELINE, emailField, subscribeButton, thankYouLabel);
+        VerticalLayout layout = new VerticalLayout(emailField, subscribeButton, thankYouLabel);
         layout.setWidth("100%");
         layout.setPadding(true);
-        emailField.setWidth("80%");
-        subscribeButton.setWidth("20%");
+        emailField.setWidth("100%");
         add(layout);
     }
 
+    /** This is for exporting the view as a web component. */
     public static class NewsletterSubscriptionExporter extends WebComponentExporter<MainView> {
         public NewsletterSubscriptionExporter() {
             super(TAG);
