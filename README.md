@@ -58,7 +58,7 @@ In order to application to be available to other demand, a few things needs to b
 1. SSL need to be turned on for secure HTTPS connection.
 2. Session cookie header needs to be configured with `SameSite=None` and `Secure`.
 3. Additional CORS headers need to be added to requests and preflight `OPTIONS` request handled properly. 
-4. `Access-Control-Allow-Origin` header cannot be `*` but list of allowed domains. 
+4. `Access-Control-Allow-Origin` header cannot be `*`, but explicit list of allowed domains. 
 
 You can check the [source code](https://github.com/samie/vaadin-cors-sample/blob/main/src/main/java/com/example/application/Application.java#L40) to see how these were implemented for Spring Boot.
 
