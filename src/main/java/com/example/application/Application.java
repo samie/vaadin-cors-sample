@@ -30,7 +30,6 @@ import java.util.Arrays;
  *
  */
 @SpringBootApplication
-@CrossOrigin(origins = "https://samie.github.io", maxAge = 3600)
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
@@ -56,14 +55,13 @@ public class Application implements AppShellConfigurator {
         };
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://samie.github.io"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+    @Configuration
+    public static class VaadinCORSSupport {
+
+        @Bean
+        @Order(0)
+        public Filter vaadinCORSFilter(@Value("") String sessionCookieName) {
+            return new VaadinCorsFilter("https://samie.github.io");
+        }
     }
 }
