@@ -58,7 +58,7 @@ To make the application available for cross-origin requests, ensure the followin
 1. Enable SSL for secure HTTPS connections.
 2. Configure the session cookie header with SameSite=None and Secure.
 3. Add necessary CORS headers `Access-Control-Allow-Origin` and `Access-Control-Allow-Credentials` to responses. 
-4. Properly handle the preflight OPTIONS requests. 
+4. Properly handle the preflight `OPTIONS` requests. 
 5. Use an explicit list of allowed domains for the `Access-Control-Allow-Origin` header instead of just `*`.
 
 You can check the [source code](https://github.com/samie/vaadin-cors-sample/blob/main/src/main/java/com/example/application/Application.java#L40) to see how these were implemented for Spring Boot.
