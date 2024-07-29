@@ -1,10 +1,61 @@
-# CORS Sample
+# Vaadin CORS Sample
 
 This project demonstrates how to configure Cross-Origin Resource Sharing (CORS) in a Vaadin application with Spring Boot. 
 It includes essential configuration and example files to help you quickly set up CORS in your own projects, ensuring 
 secure resource sharing across different origins.
 
 Demo is running at: https://samie.github.io/vaadin-cors-sample/
+
+
+```mermaid
+sequenceDiagram
+    actor UserBrowser as User/Browser
+    participant WebsiteDomain as Website (github.io)
+    participant AppDomain as Application (fly.io)
+
+    UserBrowser->>+WebsiteDomain: Open https://samie.github.io/vaadin-cors-sample/
+    WebsiteDomain->>-UserBrowser: Serve HTML
+
+    UserBrowser->>+AppDomain: Preflight OPTIONS Request
+    AppDomain->>-UserBrowser: CORS Headers
+
+    UserBrowser->>+AppDomain: Request newsletter-subscription.js
+    AppDomain->>-UserBrowser: newsletter-subscription.js (Web Component)
+
+    loop Vaadin application interaction
+        UserBrowser-->>+AppDomain: User events (GET)
+        AppDomain-->>-UserBrowser: UI Updates
+     end
+
+%%{
+  init: {
+    'theme':'base',
+    'themeVariables': {
+      'background': '#FFFFFF',
+      'fontFamily': 'Arial',
+      'fontSize': '20px',
+      'lineColor': '#657892',
+      'primaryColor': '#F1F5FB',
+      'primaryBorderColor': '#BBC9DC',
+      'primaryTextColor': '#0D1219',
+      'secondaryColor': '#95C6FF',
+      'secondaryBorderColor': '#BBC9DC',
+      'secondaryTextColor': '#657892',
+      'tertiaryColor': '#ff0000',
+      'tertiaryBorderColor': '#BBC9DC',
+      'tertiaryTextColor': '#0D1219',
+      'signalColor':'#BBC9DC',
+      'sequenceNumberColor':'#0D1219',
+      'labelBoxBorderColor' :'#BBC9DC',
+      'labelTextColor': '#0D1219',
+      'actorBkg': '#F1F5FB',
+      'actorBorder': '#BBC9DC',
+      'actorTextColor': '#0D1219'
+    }
+  }
+}%%
+
+```
 
 There are two branches in this repository:
 1. [main](https://github.com/samie/vaadin-cors-sample/tree/main) - The embedded Vaadin application. It implements a simple newsletter subscription view (stores no data).
