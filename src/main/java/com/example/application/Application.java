@@ -47,7 +47,7 @@ public class Application implements AppShellConfigurator {
                     if (cookie.getName().startsWith("JSESSIONID")) {
                         cookie.setSecure(true);
                         cookie.setAttribute("SameSite", SameSiteCookies.NONE.getValue());
-                        cookie.setAttribute("Partitioned", "");
+                        cookie.setAttribute("Partitioned", "true");
                     }
                     return super.generateHeader(cookie, request);
                 }
