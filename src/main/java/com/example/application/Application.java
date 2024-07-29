@@ -55,13 +55,14 @@ public class Application implements AppShellConfigurator {
         };
     }
 
+    /** Publish CORS WebFilter in Spring Boot runtime. */
     @Configuration
     public static class VaadinCORSSupport {
 
         @Bean
-        @Order(0)
-        public Filter vaadinCORSFilter(@Value("") String sessionCookieName) {
-            return new VaadinCorsFilter("https://samie.github.io");
+        @Order
+        public Filter vaadinCORSFilter(@Value("${embed.sites}") String allowedOrigins) {
+            return new VaadinCorsFilter(allowedOrigins);
         }
     }
 }

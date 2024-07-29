@@ -57,7 +57,7 @@ Now, you can access the application at http://localhost:8080.
 To make the application available for cross-origin requests, ensure the following:
 1. Enable SSL for secure HTTPS connections.
 2. Configure the session cookie header with SameSite=None and Secure.
-3. Add necessary CORS headers `Access-Control-Allow-Origin` and `Access-Control-Allow-Credentials` to responses. 
+3. Add necessary CORS headers `Access-Control-Allow-Origin`, `Access-Control-Allow-Credentials`, `Access-Control-Allow-Methods`, and `Access-Control-Allow-Headers` to responses. 
 4. Properly handle the preflight `OPTIONS` requests. 
 5. Use an explicit list of allowed domains for the `Access-Control-Allow-Origin` header instead of just `*`.
 

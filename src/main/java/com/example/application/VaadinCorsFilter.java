@@ -35,11 +35,14 @@ public class VaadinCorsFilter extends HttpFilter {
     @Override
     public void doFilter(HttpServletRequest httpRequest, HttpServletResponse httpResponse, FilterChain filterChain) throws IOException, ServletException {
         String origin = httpRequest.getHeader("Origin");
-        if (isOriginAllowed("https://samie.github.io")) {
+
+        // Allowed origin check
+        if (isOriginAllowed(origin)) {
             httpResponse.setHeader("Access-Control-Allow-Origin", origin);
             httpResponse.addHeader("Access-Control-Allow-Credentials", "true");
         }
 
+        // Preflight response headers
         if ("options".equalsIgnoreCase(httpRequest.getMethod())) {
             httpResponse.addHeader("Access-Control-Allow-Methods", "GET, POST");
             httpResponse.addHeader("Access-Control-Allow-Headers", "content-type");
