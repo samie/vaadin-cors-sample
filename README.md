@@ -1,4 +1,4 @@
-# Vaadin CORS Sample
+# Cross-site Vaadin Embedding Sample
 
 This project demonstrates how to configure Cross-Origin Resource Sharing (CORS) in a Vaadin application with Spring Boot. 
 It includes essential configuration and example files to help you quickly set up CORS in your own projects, ensuring 
